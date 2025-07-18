@@ -6,5 +6,10 @@ inputs:
     default: ${{ github.token }}
     required: true
   branches:
-    description: The branches to merge, one per line. The branches at the top will be merged into lower branches
+    description: >-
+      The branches to merge, one per line. The branches at the top will be
+      merged into lower branches
     required: true
+runs:
+  using: node20
+  main: dist/index.js
