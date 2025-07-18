@@ -57,6 +57,19 @@ async function action() {
           head: previous,
         });
       } catch (e) {
+		const body = '';
+		const assignees = [github.context.actor];
+
+		const client = github.getOctokit(
+		  core.getInput("token", { required: true })
+		);
+
+		await client.rest.issues.create({
+		  owner: owner,
+		  repo: repo,
+		  title: `Unable to merge ${previous} in to ${active}`,
+		  assignees: assignees
+		});
         console.log(e);
         return core.setFailed(`Unable to merge ${previous} in to ${active}`);
       }
